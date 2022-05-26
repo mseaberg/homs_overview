@@ -13,4 +13,4 @@ class App(Display):
         print('End of __init__ for template launcher')
 
     def ui_filename(self):
-        return 'appname.ui'
+        return 'homs_overview.ui'
