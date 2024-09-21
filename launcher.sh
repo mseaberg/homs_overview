@@ -8,4 +8,4 @@ launcher="$(realpath $0)"
 launcher_dir="$(dirname ${launcher})"
 app="${launcher_dir}/homs_overview/homs_overview.py"
 
-pydm ${app} $@ # Can add pydm args here
+pydm --hide-nav-bar ${app} $@ # Can add pydm args here

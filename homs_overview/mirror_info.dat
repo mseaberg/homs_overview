@@ -1,0 +1,106 @@
+{
+    "MR1L0": {
+        "inout": 0,
+        "Ranges": [
+            [
+                1,
+                14
+            ],
+            [
+                12,
+                25
+            ]
+        ],
+        "Coatings": [
+            "B4C",
+            "Ni"
+        ],
+        "prefix": "MR1L0:HOMS:"
+    },
+    "MR2L0": {
+        "inout": 0,
+        "Ranges": [
+            [
+                1,
+                14
+            ],
+            [
+                12,
+                25
+            ]
+        ],
+        "Coatings": [
+            "B4C",
+            "Ni"
+        ],
+        "prefix": "MR2L0:HOMS:"
+    },
+    "MR1L3": {
+        "inout": 1,
+        "Ranges": [
+            [
+                1,
+                13.5
+            ],
+            [
+                13,
+                25
+            ]
+        ],
+        "Coatings": [
+            "SiC",
+            "W"
+        ],
+        "prefix": "MR1L3:HOMS:"
+    },
+    "MR2L3": {
+        "inout": 0,
+        "Ranges": [
+            [
+                1,
+                13.5
+            ],
+            [
+                13,
+                25
+            ]
+        ],
+        "Coatings": [
+            "SiC",
+            "W"
+        ],
+        "prefix": "MR2L3:HOMS:"
+    },
+    "MR1L4": {
+        "inout": 1,
+        "MFX_Ranges": [
+            [
+                1,
+                13.5
+            ],
+            [
+                13,
+                25
+            ]
+        ],
+        "MFX_Pitch": [
+            -525.0,
+            -517.3
+        ],
+        "MEC_Ranges": [
+            [
+                1,
+                25
+            ],
+            [
+                13,
+                30
+            ]
+        ],
+        "Coatings": [
+            "SiC",
+            "W"
+        ],
+        "prefix": "MR1L4:HOMS:"
+    }
+}
