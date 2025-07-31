@@ -4,15 +4,18 @@ import numpy as np
 import json
 import os
 from ophyd import EpicsSignal, EpicsSignalRO
+from epics import PV
 from pydm.widgets.channel import PyDMChannel
 from pydm.data_plugins import PyDMPlugin
 import subprocess
+import threading
+import time
 #from pcdsdevices.mirror import TwinCATMirrorStripeTuple
 
 local_path = os.path.dirname(os.path.abspath(__file__))
 
 class HOMS_state:
-    def __init__(self, mirror_name):
+    def __init__(self, mirror_name, status=None):
 
         self.name = mirror_name
         with open(local_path+'/mirror_info.dat') as json_file:
@@ -53,7 +56,8 @@ class HOMS_state:
         self.coating_rbv = EpicsSignal(read_pv=self.prefix+'COATING:STATE:GET_RBV')
         self.pitch_rbv = EpicsSignalRO(read_pv=self.prefix+'MMS:PITCH.RBV')
         self.x_state = EpicsSignal(self.prefix+'MMS:XUP:STATE:SET')
-        self.coating_motor = EpicsSignal(self.prefix+'COATING:STATE:SET')
+        #self.coating_motor = EpicsSignal(self.prefix+'COATING:STATE:SET')
+        self.coating_motor = PV(self.prefix+'COATING:STATE:SET')
         self.pitch_motor = EpicsSignal(self.prefix+'MMS:PITCH')
 
         self.coating_rbv.subscribe(self.check_coating)
@@ -64,7 +68,7 @@ class HOMS_state:
         moving_names = ['MMS:PITCH.MOVN','MMS:XUP.MOVN','MMS:YUP.MOVN']
         status_names = ['Ready','Moving']
         colors = [Qt.green,Qt.yellow]
-        #self.movingStatus.connect(self.prefix,moving_names,status_names,colors)
+        status.connect(self.prefix,moving_names,status_names,colors)
 
         #error_names = ['MMS:XUP:PLC:nErrorId_RBV','MMS:YUP:PLC:nErrorId_RBV','MMS:PITCH:PLC:nErrorId_RBV',
         #        'MMS:XDWN:PLC:nErrorId_RBV','MMS:YDWN:PLC:nErrorId_RBV']
@@ -148,11 +152,17 @@ class HOMS_state:
         #    self.is_in = False
         #else:
         #    self.is_in = False
-   
+  
+    def move_in_thread(self, energy_range, destination=None):
+        thread = threading.Thread(target=self.move_in, args=[energy_range], kwargs={"destination": destination})
+        thread.start()
+
     def move_in(self, energy_range, destination=None):
-        self.coating_motor.set(energy_range+1)
         if self.is_inout:
             self.x_state.set(2)
+
+        self.coating_motor.put(energy_range+1,wait=True)
+        time.sleep(0.1)
         if self.name=='MR1L4':
             if destination=='MFX':
                 if energy_range==0:

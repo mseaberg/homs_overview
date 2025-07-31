@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>708</width>
-    <height>296</height>
+    <height>462</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -20,6 +20,90 @@
    <string>Beam Destination</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1" rowspan="3">
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Expert Screens</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="PyDMShellCommand" name="PyDMShellCommand">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>MR1L0</string>
+        </property>
+        <property name="commands" stdset="0">
+         <stringlist>
+          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR1L0:HOMS&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+         </stringlist>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="PyDMShellCommand" name="PyDMShellCommand_2">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>MR2L0</string>
+        </property>
+        <property name="commands" stdset="0">
+         <stringlist>
+          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR2L0:HOMS&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+         </stringlist>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="PyDMShellCommand" name="PyDMShellCommand_3">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>MR1L3</string>
+        </property>
+        <property name="commands" stdset="0">
+         <stringlist>
+          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR1L3:HOMS&quot;,&quot;OUT_STATE&quot;: &quot;TRUE&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+         </stringlist>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="PyDMShellCommand" name="PyDMShellCommand_4">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>MR2L3</string>
+        </property>
+        <property name="commands" stdset="0">
+         <stringlist>
+          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR2L3:HOMS&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+         </stringlist>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="PyDMShellCommand" name="PyDMShellCommand_5">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>MR1L4</string>
+        </property>
+        <property name="commands" stdset="0">
+         <stringlist>
+          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR1L4:HOMS&quot;,&quot;OUT_STATE&quot;:&quot;TRUE&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+         </stringlist>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox">
      <property name="sizePolicy">
@@ -121,90 +205,6 @@
      </layout>
     </widget>
    </item>
-   <item row="0" column="1" rowspan="2">
-    <widget class="QGroupBox" name="groupBox_3">
-     <property name="title">
-      <string>Expert Screens</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>MR1L0</string>
-        </property>
-        <property name="commands" stdset="0">
-         <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR1L0:HOMS&quot;}' mirrorScreen.py</string>
-         </stringlist>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand_2">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>MR2L0</string>
-        </property>
-        <property name="commands" stdset="0">
-         <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR2L0:HOMS&quot;}' mirrorScreen.py</string>
-         </stringlist>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand_3">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>MR1L3</string>
-        </property>
-        <property name="commands" stdset="0">
-         <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR1L3:HOMS&quot;,&quot;OUT_STATE&quot;: &quot;TRUE&quot;}' mirrorScreen.py</string>
-         </stringlist>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand_4">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>MR2L3</string>
-        </property>
-        <property name="commands" stdset="0">
-         <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR2L3:HOMS&quot;}' mirrorScreen.py</string>
-         </stringlist>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand_5">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>MR1L4</string>
-        </property>
-        <property name="commands" stdset="0">
-         <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR1L4:HOMS&quot;,&quot;OUT_STATE&quot;:&quot;TRUE&quot;}' mirrorScreen.py</string>
-         </stringlist>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="1" column="0">
     <widget class="QGroupBox" name="groupBox_2">
      <property name="maximumSize">
@@ -216,7 +216,7 @@
      <property name="title">
       <string>Mirror Readback</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_4">
+     <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
@@ -352,6 +352,65 @@
      </layout>
     </widget>
    </item>
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>Motion Indicators</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>MR1L0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>MR2L0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>MR1L3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>MR2L3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>MR1L4</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="StatusIndicator" name="MR1L0_status" native="true"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="StatusIndicator" name="MR2L0_status" native="true"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="StatusIndicator" name="MR1L3_status" native="true"/>
+      </item>
+      <item row="1" column="3">
+       <widget class="StatusIndicator" name="MR2L3_status" native="true"/>
+      </item>
+      <item row="1" column="4">
+       <widget class="StatusIndicator" name="MR1L4_status" native="true"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -364,6 +423,12 @@
    <class>PyDMShellCommand</class>
    <extends>QPushButton</extends>
    <header>pydm.widgets.shell_command</header>
+  </customwidget>
+  <customwidget>
+   <class>StatusIndicator</class>
+   <extends>QWidget</extends>
+   <header>Helper_widgets</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

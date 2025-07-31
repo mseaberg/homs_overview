@@ -4,18 +4,18 @@ from PyQt5.QtCore import Qt, QObject
 from pydm import Display
 import os
 from mirror_module import  HOMS_state
-
+import subprocess
 
 class App(Display):
 
     def __init__(self, parent=None, args=None, macros=None):
-        print('Start of __init__ for template launcher')
-        print(f'args={args}, macros={macros}')
+        #print('Start of __init__ for template launcher')
+        #print(f'args={args}, macros={macros}')
         # Call super after handling args/macros but before doing pyqt stuff
         super().__init__(parent=parent, args=args, macros=macros)
         # Now it is safe to refer to self.ui and access your widget objects
         # It is too late to do any macros processing
-        print('End of __init__ for template launcher')
+        #print('End of __init__ for template launcher')
         self.ui.hutchComboBox.addItems(['CXI','XCS','MFX','MEC'])
 
         self.ui.hutchComboBox.currentIndexChanged.connect(self.populate_energy_range)
@@ -23,11 +23,11 @@ class App(Display):
 
         self.ui.moveButton.pressed.connect(self.move_mirrors)
 
-        self.MR1L0 = HOMS_state('MR1L0')
-        self.MR2L0 = HOMS_state('MR2L0')
-        self.MR1L3 = HOMS_state('MR1L3')
-        self.MR2L3 = HOMS_state('MR2L3')
-        self.MR1L4 = HOMS_state('MR1L4')
+        self.MR1L0 = HOMS_state('MR1L0',status=self.ui.MR1L0_status)
+        self.MR2L0 = HOMS_state('MR2L0',status=self.ui.MR2L0_status)
+        self.MR1L3 = HOMS_state('MR1L3',status=self.ui.MR1L3_status)
+        self.MR2L3 = HOMS_state('MR2L3',status=self.ui.MR2L3_status)
+        self.MR1L4 = HOMS_state('MR1L4',status=self.ui.MR1L4_status)
         #self.MR1L0.connect_mirror('MR1L0')
         #self.MR2L0.connect_mirror('MR2L0')
         #self.MR1L3.connect_mirror('MR1L3')
@@ -80,68 +80,36 @@ class App(Display):
         self.resize(self.ui.minimumSizeHint())
 
     def show_mr1l0(self):
-        if not self.ui.mr1l0Button.isChecked():
-            self.ui.PyDMEmbeddedDisplay.hide()
-            QtCore.QTimer.singleShot(500,self.do_resize)
-        else:
-            self.ui.PyDMEmbeddedDisplay.show()
-            #QtCore.QTimer.singleShot(500,self.do_resize)
-
+        pass    
+            
     def show_mr2l0(self):
-        if not self.ui.mr2l0Button.isChecked():
-            self.ui.PyDMEmbeddedDisplay_2.hide()
-            QtCore.QTimer.singleShot(500,self.do_resize)
-        else:
-            self.ui.PyDMEmbeddedDisplay_2.show()
-            #QtCore.QTimer.singleShot(500,self.do_resize)
-
-
+        pass
     def show_mr1l3(self):
-        if not self.ui.mr1l3Button.isChecked():
-            self.ui.PyDMEmbeddedDisplay_3.hide()
-            QtCore.QTimer.singleShot(500,self.do_resize)
-        else:
-            self.ui.PyDMEmbeddedDisplay_3.show()
-            #QtCore.QTimer.singleShot(500,self.do_resize)
-
-
+        pass
     def show_mr1l4(self):
-        if not self.ui.mr1l4Button.isChecked():
-            self.ui.PyDMEmbeddedDisplay_4.hide()
-            QtCore.QTimer.singleShot(500,self.do_resize)
-        else:
-            self.ui.PyDMEmbeddedDisplay_4.show()
-            #QtCore.QTimer.singleShot(500,self.do_resize)
-
+        pass
     def show_mr2l3(self):
-        if not self.ui.mr2l3Button.isChecked():
-            self.ui.PyDMEmbeddedDisplay_5.hide()
-            QtCore.QTimer.singleShot(500,self.do_resize)
-        else:
-            self.ui.PyDMEmbeddedDisplay_5.show()
-            #QtCore.QTimer.singleShot(500,self.do_resize)
-
-
+        pass
     def move_mirrors(self):
 
         destination = self.ui.hutchComboBox.currentText()
         energy_range = self.ui.energyComboBox.currentIndex()
-        #self.MR1L0.move_in(energy_range)
-        #self.MR2L0.move_in(energy_range)
+        self.MR1L0.move_in_thread(energy_range)
+        self.MR2L0.move_in_thread(energy_range)
 
         if destination=='CXI':
             self.MR1L4.move_out()
             self.MR1L3.move_out()
         elif destination=='XCS':
-            self.MR1L3.move_in(energy_range)
-            self.MR2L3.move_in(energy_range)
+            self.MR1L3.move_in_thread(energy_range)
+            self.MR2L3.move_in_thread(energy_range)
             self.MR1L4.move_out()
         elif destination=='MFX':
             self.MR1L3.move_out()
-            self.MR1L4.move_in(energy_range,destination='MFX')
+            self.MR1L4.move_in_thread(energy_range,destination='MFX')
         elif destination=='MEC':
             self.MR1L3.move_out()
-            self.MR1L4.move_in(energy_range,destination='MEC')
+            self.MR1L4.move_in_thread(energy_range,destination='MEC')
 
     def check_range(self,*args):
         minE = 0
@@ -202,7 +170,7 @@ class App(Display):
         elif hutch=='MFX':
             energy = ['1-13.5','13-25']
         elif hutch=='MEC':
-            energy = ['1-25','13-30']
+            energy = ['1-13.5','13-25']
         else:
             energy = ['1-14','12-25']
         self.ui.energyComboBox.clear()
