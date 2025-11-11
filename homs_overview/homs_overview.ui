@@ -36,7 +36,7 @@
         </property>
         <property name="commands" stdset="0">
          <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR1L0:HOMS&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR1L0:HOMS&quot;}' </string>
          </stringlist>
         </property>
        </widget>
@@ -51,7 +51,7 @@
         </property>
         <property name="commands" stdset="0">
          <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR2L0:HOMS&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR2L0:HOMS&quot;}' </string>
          </stringlist>
         </property>
        </widget>
@@ -66,7 +66,7 @@
         </property>
         <property name="commands" stdset="0">
          <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR1L3:HOMS&quot;,&quot;OUT_STATE&quot;: &quot;TRUE&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR1L3:HOMS&quot;,&quot;OUT_STATE&quot;:&quot;TRUE&quot;}' </string>
          </stringlist>
         </property>
        </widget>
@@ -81,7 +81,7 @@
         </property>
         <property name="commands" stdset="0">
          <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR2L3:HOMS&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR2L3:HOMS&quot;}'</string>
          </stringlist>
         </property>
        </widget>
@@ -96,7 +96,7 @@
         </property>
         <property name="commands" stdset="0">
          <stringlist>
-          <string>pydm --hide-menu-bar --hide-nav-bar -m '{&quot;BASE_PV&quot;:&quot;MR1L4:HOMS&quot;,&quot;OUT_STATE&quot;:&quot;TRUE&quot;}' $launcher_dir/homs_overview/mirrorScreen.py</string>
+          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR1L4:HOMS&quot;,&quot;OUT_STATE&quot;:&quot;TRUE&quot;}'</string>
          </stringlist>
         </property>
        </widget>
