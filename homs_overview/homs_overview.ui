@@ -27,77 +27,157 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand">
+       <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton">
         <property name="toolTip">
          <string/>
         </property>
         <property name="text">
          <string>MR1L0</string>
         </property>
-        <property name="commands" stdset="0">
+        <property name="filenames" stdset="0">
          <stringlist>
-          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR1L0:HOMS&quot;}' </string>
+          <string>$launcher_dir/homs_overview/mirrorScreen.py</string>
          </stringlist>
+        </property>
+        <property name="titles" stdset="0">
+         <stringlist>
+          <string>test</string>
+         </stringlist>
+        </property>
+        <property name="showIcon" stdset="0">
+         <bool>true</bool>
+        </property>
+        <property name="macros" stdset="0">
+         <stringlist>
+          <string>{&quot;BASE_PV&quot;:&quot;MR1L0:HOMS&quot;}</string>
+         </stringlist>
+        </property>
+        <property name="openInNewWindow" stdset="0">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand_2">
+       <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton_2">
         <property name="toolTip">
          <string/>
         </property>
         <property name="text">
          <string>MR2L0</string>
         </property>
-        <property name="commands" stdset="0">
+        <property name="filenames" stdset="0">
          <stringlist>
-          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR2L0:HOMS&quot;}' </string>
+          <string>$launcher_dir/homs_overview/mirrorScreen.py</string>
          </stringlist>
+        </property>
+        <property name="titles" stdset="0">
+         <stringlist>
+          <string>test</string>
+         </stringlist>
+        </property>
+        <property name="showIcon" stdset="0">
+         <bool>true</bool>
+        </property>
+        <property name="macros" stdset="0">
+         <stringlist>
+          <string>{&quot;BASE_PV&quot;:&quot;MR2L0:HOMS&quot;}</string>
+         </stringlist>
+        </property>
+        <property name="openInNewWindow" stdset="0">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand_3">
+       <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton_3">
         <property name="toolTip">
          <string/>
         </property>
         <property name="text">
          <string>MR1L3</string>
         </property>
-        <property name="commands" stdset="0">
+        <property name="filenames" stdset="0">
          <stringlist>
-          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR1L3:HOMS&quot;,&quot;OUT_STATE&quot;:&quot;TRUE&quot;}' </string>
+          <string>$launcher_dir/homs_overview/mirrorScreen.py</string>
          </stringlist>
+        </property>
+        <property name="titles" stdset="0">
+         <stringlist>
+          <string>test</string>
+         </stringlist>
+        </property>
+        <property name="showIcon" stdset="0">
+         <bool>true</bool>
+        </property>
+        <property name="macros" stdset="0">
+         <stringlist>
+          <string>{&quot;BASE_PV&quot;:&quot;MR1L3:HOMS&quot;,&quot;OUT_STATE&quot;:&quot;TRUE&quot;}</string>
+         </stringlist>
+        </property>
+        <property name="openInNewWindow" stdset="0">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand_4">
+       <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton_4">
         <property name="toolTip">
          <string/>
         </property>
         <property name="text">
          <string>MR2L3</string>
         </property>
-        <property name="commands" stdset="0">
+        <property name="filenames" stdset="0">
          <stringlist>
-          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR2L3:HOMS&quot;}'</string>
+          <string>$launcher_dir/homs_overview/mirrorScreen.py</string>
          </stringlist>
+        </property>
+        <property name="titles" stdset="0">
+         <stringlist>
+          <string>test</string>
+         </stringlist>
+        </property>
+        <property name="showIcon" stdset="0">
+         <bool>true</bool>
+        </property>
+        <property name="macros" stdset="0">
+         <stringlist>
+          <string>{&quot;BASE_PV&quot;:&quot;MR2L3:HOMS&quot;}</string>
+         </stringlist>
+        </property>
+        <property name="openInNewWindow" stdset="0">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="PyDMShellCommand" name="PyDMShellCommand_5">
+       <widget class="PyDMRelatedDisplayButton" name="PyDMRelatedDisplayButton_5">
         <property name="toolTip">
          <string/>
         </property>
         <property name="text">
          <string>MR1L4</string>
         </property>
-        <property name="commands" stdset="0">
+        <property name="filenames" stdset="0">
          <stringlist>
-          <string>$launcher_dir/launch_offset_ui.sh '{&quot;BASE_PV&quot;:&quot;MR1L4:HOMS&quot;,&quot;OUT_STATE&quot;:&quot;TRUE&quot;}'</string>
+          <string>$launcher_dir/homs_overview/mirrorScreen.py</string>
          </stringlist>
+        </property>
+        <property name="titles" stdset="0">
+         <stringlist>
+          <string>test</string>
+         </stringlist>
+        </property>
+        <property name="showIcon" stdset="0">
+         <bool>true</bool>
+        </property>
+        <property name="macros" stdset="0">
+         <stringlist>
+          <string>{&quot;BASE_PV&quot;:&quot;MR1L4:HOMS&quot;,&quot;OUT_STATE&quot;:&quot;TRUE&quot;}</string>
+         </stringlist>
+        </property>
+        <property name="openInNewWindow" stdset="0">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -420,9 +500,9 @@
    <header>pydm.widgets.label</header>
   </customwidget>
   <customwidget>
-   <class>PyDMShellCommand</class>
+   <class>PyDMRelatedDisplayButton</class>
    <extends>QPushButton</extends>
-   <header>pydm.widgets.shell_command</header>
+   <header>pydm.widgets.related_display_button</header>
   </customwidget>
   <customwidget>
    <class>StatusIndicator</class>
