@@ -28,6 +28,7 @@ class App(Display):
         self.MR1L3 = HOMS_state('MR1L3',status=self.ui.MR1L3_status)
         self.MR2L3 = HOMS_state('MR2L3',status=self.ui.MR2L3_status)
         self.MR1L4 = HOMS_state('MR1L4',status=self.ui.MR1L4_status)
+        self.mirror_list = [self.MR1L0, self.MR2L0, self.MR1L3, self.MR2L3, self.MR1L4]
         #self.MR1L0.connect_mirror('MR1L0')
         #self.MR2L0.connect_mirror('MR2L0')
         #self.MR1L3.connect_mirror('MR1L3')
@@ -156,10 +157,24 @@ class App(Display):
             self.curr_range = [0,0]
             width = 200
 
+        pitch_correct = np.zeros(5)
+
+        for num, mirror in enumerate(self.mirror_list):
+            pitch_correct[num] = mirror.check_pitch()
+
+        if pitch_correct[0]==1:
+            self.ui.pitch_status_label.setText('MR1L0 Pitch Nominal')
+            self.ui.pitch_status_label.setStyleSheet('background-color: %s' % ('green'))
+        else:
+            self.ui.pitch_status_label.setText('Check MR1L0 Pitch')
+            self.ui.pitch_status_label.setStyleSheet('background-color: %s' % ('red'))
+        
+        
         self.ui.beamLabel.setText(self.destination)
         self.ui.beamLabel.setStyleSheet("background-color: %s; color: %s" % (self.bg,self.color))
         self.ui.beamLabel.setFixedWidth(width)
         self.ui.energyLabel.setText('%.1f-%.1f keV' % (self.curr_range[0],self.curr_range[1]))
+
 
     def populate_energy_range(self):
         hutch = self.ui.hutchComboBox.currentText()

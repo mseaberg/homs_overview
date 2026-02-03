@@ -4,6 +4,8 @@ from ophyd import EpicsSignalRO
 from pyqtgraph.Qt import QtGui
 from PyQt5.QtCore import Qt, pyqtSignal
 import json
+import numpy as np
+import time
 
 
 local_path = os.path.dirname(os.path.abspath(__file__))
@@ -89,12 +91,14 @@ class StatusIndicator(QStatus, Ui_Status):
         #print(kwargs.keys())
         #print(kwargs['obj'])
 
+
+        all_status = []
         name = kwargs['obj'].name
         self.status[name] = kwargs['value']
 
-        all_status = []
         for key,value in self.status.items():
             all_status.append(value)
+
         status = any(all_status)
 
         self.statusLabel.setText(self.status_names[int(status)])
