@@ -56,8 +56,6 @@ class HOMS_state:
 
         self.x_state_rbv = EpicsSignalRO(read_pv=self.prefix+'MMS:XUP:STATE:GET_RBV')
         self.coating_rbv = EpicsSignal(read_pv=self.prefix+'COATING:STATE:GET_RBV')
-        self.coating_done = EpicsSignalRO(read_pv=self.prefix+'COATING:STATE:DONE_RBV')
-        self.pitch_done = EpicsSignalRO(read_pv=self.prefix+'MMS:PITCH:DONE_RBV')
         self.pitch_rbv = EpicsSignalRO(read_pv=self.prefix+'MMS:PITCH.RBV')
         self.x_state = EpicsSignal(self.prefix+'MMS:XUP:STATE:SET')
         #self.coating_motor = EpicsSignal(self.prefix+'COATING:STATE:SET')
