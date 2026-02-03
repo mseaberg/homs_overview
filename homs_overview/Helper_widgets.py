@@ -4,8 +4,6 @@ from ophyd import EpicsSignalRO
 from pyqtgraph.Qt import QtGui
 from PyQt5.QtCore import Qt, pyqtSignal
 import json
-import numpy as np
-import time
 
 
 local_path = os.path.dirname(os.path.abspath(__file__))
