@@ -207,9 +207,7 @@ class HOMS_state:
         moving_status = True
         while moving_status:
             moving_status = np.logical_and(self.coating_moving.get(),self.pitch_moving.get())
-            time.sleep(0.5)
-
-        time.sleep(0.5) 
+        time.sleep(1) 
         if np.abs(self.pitch_rbv.get()-self.nominal_pitch)>0.2:
             self.move_pitch()
 
