@@ -106,10 +106,10 @@ class HOMS_state:
         if kwargs['value']==1:
             if self.name=='MR1L4':
                 if self.destination=='MFX':
-                    self.current_range = self.MFX_ranges[0]
+                    self.current_range = self.mfx_ranges[0]
                     self.nominal_pitch = self.pitch_rbvs['MFX_Coating1'].get()
                 elif self.destination=='MEC':
-                    self.current_range = self.MEC_ranges[0]
+                    self.current_range = self.mec_ranges[0]
                     self.nominal_pitch = self.pitch_rbvs['MEC_Coating1'].get()
                 else:
                     self.current_range = None
@@ -119,10 +119,10 @@ class HOMS_state:
         elif kwargs['value']==2:
             if self.name=='MR1L4':
                 if self.destination=='MFX':
-                    self.current_range = self.MFX_ranges[1]
+                    self.current_range = self.mfx_ranges[1]
                     self.nominal_pitch = self.pitch_rbvs['MFX_Coating2'].get()
                 elif self.destination=='MEC':
-                    self.current_range = self.MEC_ranges[1]
+                    self.current_range = self.mec_ranges[1]
                     self.nominal_pitch = self.pitch_rbvs['MEC_Coating2'].get()
                 else:
                     self.current_range = None
