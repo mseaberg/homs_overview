@@ -34,6 +34,7 @@ class App(Display):
         #self.MR1L3.connect_mirror('MR1L3')
         #self.MR2L3.connect_mirror('MR2L3')
         #self.MR1L4.connect_mirror('MR1L4')
+        self.prev_destination='Unknown'
         self.destination = 'XCS'
         self.curr_range = [0,0]
         self.bg = 'purple'
@@ -174,6 +175,46 @@ class App(Display):
         self.ui.beamLabel.setStyleSheet("background-color: %s; color: %s" % (self.bg,self.color))
         self.ui.beamLabel.setFixedWidth(width)
         self.ui.energyLabel.setText('%.1f-%.1f keV' % (self.curr_range[0],self.curr_range[1]))
+
+        if self.destination != self.prev_destination:
+            if self.destination=='CXI':
+                self.pitchGroupbox.setTitle('Adjust Undulators')
+                self.NegTweakButton.channel = 'ca://MR2L0:HOMS:MMS:PITCH:TWR'
+                self.PosTweakButton.channel = 'ca://MR2L0:HOMS:MMS:PITCH:TWF'
+                self.TweakAmountLineEdit.channel = 'ca://MR2L0:HOMS:MMS:PITCH:TWV'
+                self.PitchReadbackLabel.channel = 'ca://MR2L0:HOMS:MMS:PITCH.RBV'
+
+                self.NegTweakButton.setEnabled(False)
+                self.PosTweakButton.setEnabled(False)
+                self.TweakAmountLineEdit.setEnabled(False)
+                self.PitchReadbackLabel.setEnabled(False)
+
+            elif self.destination=='MFX' or self.destination=='MEC':
+                self.pitchGroupbox.setTitle('MR1L4 Pitch Adjustment')
+                self.NegTweakButton.channel = 'ca://MR1L4:HOMS:MMS:PITCH:TWR'
+                self.PosTweakButton.channel = 'ca://MR1L4:HOMS:MMS:PITCH:TWF'
+                self.TweakAmountLineEdit.channel = 'ca://MR1L4:HOMS:MMS:PITCH:TWV'
+                self.PitchReadbackLabel.channel = 'ca://MR1L4:HOMS:MMS:PITCH.RBV'
+                self.NegTweakButton.setEnabled(True)
+                self.PosTweakButton.setEnabled(True)
+                self.TweakAmountLineEdit.setEnabled(True)
+                self.PitchReadbackLabel.setEnabled(True)
+
+
+            elif self.destination=='XCS':
+                self.pitchGroupbox.setTitle('MR1L3 Pitch Adjustment')
+                self.NegTweakButton.channel = 'ca://MR1L3:HOMS:MMS:PITCH:TWR'
+                self.PosTweakButton.channel = 'ca://MR1L3:HOMS:MMS:PITCH:TWF'
+                self.TweakAmountLineEdit.channel = 'ca://MR1L3:HOMS:MMS:PITCH:TWV'
+                self.PitchReadbackLabel.channel = 'ca://MR1L3:HOMS:MMS:PITCH.RBV'
+                self.NegTweakButton.setEnabled(True)
+                self.PosTweakButton.setEnabled(True)
+                self.TweakAmountLineEdit.setEnabled(True)
+                self.PitchReadbackLabel.setEnabled(True)
+
+
+            self.prev_destination = str(self.destination)
+
 
 
     def populate_energy_range(self):
