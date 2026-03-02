@@ -4,6 +4,7 @@ from ophyd import EpicsSignalRO
 from pyqtgraph.Qt import QtGui
 from PyQt5.QtCore import Qt, pyqtSignal
 import json
+import numpy as np
 
 
 local_path = os.path.dirname(os.path.abspath(__file__))
@@ -69,36 +70,78 @@ class StatusIndicator(QStatus, Ui_Status):
     def __init__(self, parent=None):
         super(StatusIndicator,self).__init__()
         self.setupUi(self)
-        self.pvs = {}
-        self.status = {}
+        self.moving_pvs = {}
+        self.error_pvs = {}
+        self.moving_status = {}
+        self.error_status = {}
         self.status_names = []
         self.colors = []
+        self.pitch_rbv = None
+        self.nominal_pitch = None
 
-    def connect(self,prefix, pv_names, status_names,colors):
-        for pv_name in pv_names:
-            pv_name = prefix + pv_name
-            self.pvs[pv_name] = EpicsSignalRO(read_pv=pv_name)
-            self.status[pv_name] = False
+    def connect(self,prefix, pitch_pv, moving_pvs, error_pvs, status_names,colors):
         
-            self.pvs[pv_name].subscribe(self.update_status)
+        self.pitch_rbv = pitch_pv
+        for pv_name in moving_pvs:
+            pv_name = prefix + pv_name
+            self.moving_pvs[pv_name] = EpicsSignalRO(read_pv=pv_name)
+            self.moving_status[pv_name] = False
+        
+            self.moving_pvs[pv_name].subscribe(self.update_status)
+
+        for pv_name in error_pvs:
+            pv_name = prefix + pv_name
+            self.error_pvs[pv_name] = EpicsSignalRO(read_pv=pv_name)
+            self.error_status[pv_name] = False
+        
+            self.error_pvs[pv_name].subscribe(self.update_status)
+
 
         self.status_names = status_names
         self.colors = colors
+
+    def update_nominal(self, nominal):
+        self.nominal_pitch = nominal
 
     def update_status(self,**kwargs):
         #print(kwargs.keys())
         #print(kwargs['obj'])
 
 
-        all_status = []
+        moving_status_all = []
+        error_status_all = []
         name = kwargs['obj'].name
-        self.status[name] = kwargs['value']
+        if 'Error' in name:
+            self.error_status[name] = kwargs['value']
+        else:
+            self.moving_status[name] = kwargs['value']
 
-        for key,value in self.status.items():
-            all_status.append(value)
+        for key,value in self.moving_status.items():
+            moving_status_all.append(value)
 
-        status = any(all_status)
+        for key, value in self.error_status.items():
+            error_status_all.append(value)
 
-        self.statusLabel.setText(self.status_names[int(status)])
-        self.statusCircle.brush.setColor(QtGui.QColor(self.colors[int(status)]))# = QtGui.QBrush(self.colors[int(status)])
+        curr_moving_status = any(moving_status_all)
+        curr_error_status = any(error_status_all)
+
+        # check pitch
+        pitch_flag = 0
+        if self.nominal_pitch is not None:
+            if np.abs(self.pitch_rbv.get()-self.nominal_pitch.get())>0.2:
+                pitch_flag = 1
+
+        if curr_error_status:
+            self.statusLabel.setText(self.status_names[2])
+            self.statusCircle.brush.setColor(QtGui.QColor(self.colors[2]))# = QtGui.QBrush(self.colors[int(status)])
+        elif curr_moving_status:
+            self.statusLabel.setText(self.status_names[int(curr_moving_status)])
+            self.statusCircle.brush.setColor(QtGui.QColor(self.colors[int(curr_moving_status)]))
+        elif pitch_flag:
+            self.statusLabel.setText('Check\nPitch')
+            self.statusCircle.brush.setColor(QtGui.QColor(self.colors[1]))
+        else:
+            self.statusLabel.setText('On\nTarget')
+            self.statusCircle.brush.setColor(QtGui.QColor(self.colors[0]))
+
         self.statusCircle.update()

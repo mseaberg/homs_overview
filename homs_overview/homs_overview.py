@@ -179,9 +179,9 @@ class App(Display):
         if self.destination != self.prev_destination:
             if self.destination=='CXI':
                 self.pitchGroupbox.setTitle('Adjust Undulators')
-                self.NegTweakButton.channel = 'ca://MR2L0:HOMS:MMS:PITCH:TWR'
-                self.PosTweakButton.channel = 'ca://MR2L0:HOMS:MMS:PITCH:TWF'
-                self.TweakAmountLineEdit.channel = 'ca://MR2L0:HOMS:MMS:PITCH:TWV'
+                self.NegTweakButton.channel = 'ca://MR2L0:HOMS:MMS:PITCH.TWR'
+                self.PosTweakButton.channel = 'ca://MR2L0:HOMS:MMS:PITCH.TWF'
+                self.TweakAmountLineEdit.channel = 'ca://MR2L0:HOMS:MMS:PITCH.TWV'
                 self.PitchReadbackLabel.channel = 'ca://MR2L0:HOMS:MMS:PITCH.RBV'
 
                 self.NegTweakButton.setEnabled(False)
@@ -191,21 +191,20 @@ class App(Display):
 
             elif self.destination=='MFX' or self.destination=='MEC':
                 self.pitchGroupbox.setTitle('MR1L4 Pitch Adjustment')
-                self.NegTweakButton.channel = 'ca://MR1L4:HOMS:MMS:PITCH:TWR'
-                self.PosTweakButton.channel = 'ca://MR1L4:HOMS:MMS:PITCH:TWF'
-                self.TweakAmountLineEdit.channel = 'ca://MR1L4:HOMS:MMS:PITCH:TWV'
+                self.NegTweakButton.channel = 'ca://MR1L4:HOMS:MMS:PITCH.TWR'
+                self.PosTweakButton.channel = 'ca://MR1L4:HOMS:MMS:PITCH.TWF'
+                self.TweakAmountLineEdit.channel = 'ca://MR1L4:HOMS:MMS:PITCH.TWV'
                 self.PitchReadbackLabel.channel = 'ca://MR1L4:HOMS:MMS:PITCH.RBV'
                 self.NegTweakButton.setEnabled(True)
                 self.PosTweakButton.setEnabled(True)
                 self.TweakAmountLineEdit.setEnabled(True)
                 self.PitchReadbackLabel.setEnabled(True)
 
-
             elif self.destination=='XCS':
                 self.pitchGroupbox.setTitle('MR1L3 Pitch Adjustment')
-                self.NegTweakButton.channel = 'ca://MR1L3:HOMS:MMS:PITCH:TWR'
-                self.PosTweakButton.channel = 'ca://MR1L3:HOMS:MMS:PITCH:TWF'
-                self.TweakAmountLineEdit.channel = 'ca://MR1L3:HOMS:MMS:PITCH:TWV'
+                self.NegTweakButton.channel = 'ca://MR1L3:HOMS:MMS:PITCH.TWR'
+                self.PosTweakButton.channel = 'ca://MR1L3:HOMS:MMS:PITCH.TWF'
+                self.TweakAmountLineEdit.channel = 'ca://MR1L3:HOMS:MMS:PITCH.TWV'
                 self.PitchReadbackLabel.channel = 'ca://MR1L3:HOMS:MMS:PITCH.RBV'
                 self.NegTweakButton.setEnabled(True)
                 self.PosTweakButton.setEnabled(True)

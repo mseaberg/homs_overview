@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
+    <width>696</width>
     <height>693</height>
    </rect>
   </property>
@@ -122,7 +122,7 @@
             <string/>
            </property>
            <property name="text">
-            <string/>
+            <string>ca://${BASE_PV}:COATING:STATE:GET_RBV</string>
            </property>
            <property name="channel" stdset="0">
             <string>ca://${BASE_PV}:COATING:STATE:GET_RBV</string>

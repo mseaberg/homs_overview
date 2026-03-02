@@ -70,12 +70,19 @@ class HOMS_state:
         self.pitch_moving = EpicsSignalRO(read_pv=self.prefix+'MMS:PITCH.MOVN')
 
         moving_names = ['MMS:PITCH.MOVN','MMS:XUP.MOVN','MMS:YUP.MOVN']
-        status_names = ['Ready','Moving']
-        colors = [Qt.green,Qt.yellow]
-        status.connect(self.prefix,moving_names,status_names,colors)
 
-        #error_names = ['MMS:XUP:PLC:nErrorId_RBV','MMS:YUP:PLC:nErrorId_RBV','MMS:PITCH:PLC:nErrorId_RBV',
-        #        'MMS:XDWN:PLC:nErrorId_RBV','MMS:YDWN:PLC:nErrorId_RBV']
+        error_names = ['MMS:XUP:PLC:nErrorId_RBV','MMS:YUP:PLC:nErrorId_RBV','MMS:PITCH:PLC:nErrorId_RBV',
+                'MMS:XDWN:PLC:nErrorId_RBV','MMS:YDWN:PLC:nErrorId_RBV']
+
+        status_names = ['Ready','Moving','Error']
+        colors = [Qt.green,Qt.yellow,Qt.red]
+        self.status = status
+        self.status.connect(self.prefix,self.pitch_rbv, moving_names,error_names,status_names,colors)
+
+        error_names = ['MMS:XUP:PLC:nErrorId_RBV','MMS:YUP:PLC:nErrorId_RBV','MMS:PITCH:PLC:nErrorId_RBV',
+                'MMS:XDWN:PLC:nErrorId_RBV','MMS:YDWN:PLC:nErrorId_RBV']
+
+        self.check_coating(value=self.coating_rbv.get())
 
     def update_mirror(self):
         with open(local_path+'/mirror_info.dat') as json_file:
@@ -107,31 +114,32 @@ class HOMS_state:
             if self.name=='MR1L4':
                 if self.destination=='MFX':
                     self.current_range = self.mfx_ranges[0]
-                    self.nominal_pitch = self.pitch_rbvs['MFX_Coating1'].get()
+                    self.nominal_pitch = self.pitch_rbvs['MFX_Coating1']
                 elif self.destination=='MEC':
                     self.current_range = self.mec_ranges[0]
-                    self.nominal_pitch = self.pitch_rbvs['MEC_Coating1'].get()
+                    self.nominal_pitch = self.pitch_rbvs['MEC_Coating1']
                 else:
                     self.current_range = None
             else:
                 self.current_range = self.ranges[0]
-                self.nominal_pitch = self.pitch_rbvs['Coating1'].get()
+                self.nominal_pitch = self.pitch_rbvs['Coating1']
         elif kwargs['value']==2:
             if self.name=='MR1L4':
                 if self.destination=='MFX':
                     self.current_range = self.mfx_ranges[1]
-                    self.nominal_pitch = self.pitch_rbvs['MFX_Coating2'].get()
+                    self.nominal_pitch = self.pitch_rbvs['MFX_Coating2']
                 elif self.destination=='MEC':
                     self.current_range = self.mec_ranges[1]
-                    self.nominal_pitch = self.pitch_rbvs['MEC_Coating2'].get()
+                    self.nominal_pitch = self.pitch_rbvs['MEC_Coating2']
                 else:
                     self.current_range = None
             else:
 
                 self.current_range = self.ranges[1]
-                self.nominal_pitch = self.pitch_rbvs['Coating2'].get()
+                self.nominal_pitch = self.pitch_rbvs['Coating2']
         else:
             self.current_range = None
+        self.status.update_nominal(self.nominal_pitch)
 
     def check_dest(self, **kwargs):
         if self.name=='MR1L4':
@@ -168,7 +176,7 @@ class HOMS_state:
         thread.start()
 
     def move_pitch(self,**kwargs):
-        self.pitch_motor.set(self.nominal_pitch)
+        self.pitch_motor.set(self.nominal_pitch.get())
 
     def move_in(self, energy_range, destination=None):
         if self.is_inout:
@@ -180,39 +188,41 @@ class HOMS_state:
         if self.name=='MR1L4':
             if destination=='MFX':
                 if energy_range==0:
-                    self.nominal_pitch = self.pitch_rbvs['MFX_Coating1'].get()
-                    self.pitch_motor.set(self.nominal_pitch)
+                    self.nominal_pitch = self.pitch_rbvs['MFX_Coating1']
+                    self.pitch_motor.set(self.nominal_pitch.get())
                     
                 elif energy_range==1:
-                    self.nominal_pitch = self.pitch_rbvs['MFX_Coating2'].get()
-                    self.pitch_motor.set(self.nominal_pitch)
+                    self.nominal_pitch = self.pitch_rbvs['MFX_Coating2']
+                    self.pitch_motor.set(self.nominal_pitch.get())
             elif destination=='MEC':
                 if energy_range==0:
-                    self.nominal_pitch = self.pitch_rbvs['MEC_Coating1'].get()
-                    self.pitch_motor.set(self.nominal_pitch)
+                    self.nominal_pitch = self.pitch_rbvs['MEC_Coating1']
+                    self.pitch_motor.set(self.nominal_pitch.get())
                 elif energy_range==1:
-                    self.nominal_pitch = self.pitch_rbvs['MEC_Coating2'].get()
-                    self.pitch_motor.set(self.nominal_pitch)
+                    self.nominal_pitch = self.pitch_rbvs['MEC_Coating2']
+                    self.pitch_motor.set(self.nominal_pitch.get())
         else:
             if energy_range==0:
-                self.nominal_pitch = self.pitch_rbvs['Coating1'].get()
-                self.pitch_motor.set(self.nominal_pitch)
+                self.nominal_pitch = self.pitch_rbvs['Coating1']
+                self.pitch_motor.set(self.nominal_pitch.get())
             elif energy_range==1:
-                self.nominal_pitch = self.pitch_rbvs['Coating2'].get()
-                self.pitch_motor.set(self.nominal_pitch)
+                self.nominal_pitch = self.pitch_rbvs['Coating2']
+                self.pitch_motor.set(self.nominal_pitch.get())
        
         # wait for mirror to stop moving and then send pitch command again
+
+        self.status.update_nominal(self.nominal_pitch)
         moving_status = True
         while moving_status:
             moving_status = np.logical_and(self.coating_moving.get(),self.pitch_moving.get())
         time.sleep(1) 
-        if np.abs(self.pitch_rbv.get()-self.nominal_pitch)>0.2:
+        if np.abs(self.pitch_rbv.get()-self.nominal_pitch.get())>0.2:
             self.move_pitch()
 
     def check_pitch(self):
         pitch_flag = 1
         if self.nominal_pitch is not None:
-            if np.abs(self.pitch_rbv.get()-self.nominal_pitch)>0.2:
+            if np.abs(self.pitch_rbv.get()-self.nominal_pitch.get())>0.2:
                 pitch_flag=0
         return pitch_flag
 
