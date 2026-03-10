@@ -113,7 +113,6 @@ class StatusIndicator(QStatus, Ui_Status):
         #print(kwargs.keys())
         #print(kwargs['obj'])
         
-        print(self.pitch_rbv.get())
         moving_status_all = []
         error_status_all = []
         if 'obj' in kwargs.keys():

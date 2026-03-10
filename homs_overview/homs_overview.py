@@ -158,17 +158,17 @@ class App(Display):
             self.curr_range = [0,0]
             width = 200
 
-        pitch_correct = np.zeros(5)
+        #pitch_correct = np.zeros(5)
 
-        for num, mirror in enumerate(self.mirror_list):
-            pitch_correct[num] = mirror.check_pitch()
+        #for num, mirror in enumerate(self.mirror_list):
+        #    pitch_correct[num] = mirror.check_pitch()
 
-        if pitch_correct[0]==1:
-            self.ui.pitch_status_label.setText('MR1L0 Pitch Nominal')
-            self.ui.pitch_status_label.setStyleSheet('background-color: %s' % ('green'))
-        else:
-            self.ui.pitch_status_label.setText('Check MR1L0 Pitch')
-            self.ui.pitch_status_label.setStyleSheet('background-color: %s' % ('red'))
+        #if pitch_correct[0]==1:
+        #    self.ui.pitch_status_label.setText('MR1L0 Pitch Nominal')
+        #    self.ui.pitch_status_label.setStyleSheet('background-color: %s' % ('green'))
+        #else:
+        #    self.ui.pitch_status_label.setText('Check MR1L0 Pitch')
+        #    self.ui.pitch_status_label.setStyleSheet('background-color: %s' % ('red'))
         
         
         self.ui.beamLabel.setText(self.destination)
@@ -184,12 +184,14 @@ class App(Display):
                 self.TweakAmountLineEdit.channel = None#'ca://MR2L0:HOMS:MMS:PITCH.TWV'
                 self.PitchReadbackLabel.channel = None#'ca://MR2L0:HOMS:MMS:PITCH.RBV'
 
-                #self.NegTweakButton.setEnabled(False)
-                #self.PosTweakButton.setEnabled(False)
-                #self.NegTweakButton.updatePressValue(1)
-                #self.PosTweakButton.updatePressValue(1)
-                #self.TweakAmountLineEdit.setEnabled(False)
-                #self.PitchReadbackLabel.setEnabled(False)
+            elif self.destination=='Unknown':
+                self.pitchGroupbox.setTitle('Wait for transition to complete')
+                self.NegTweakButton.channel = None# 'ca://MR2L0:HOMS:MMS:PITCH.TWR'
+                self.PosTweakButton.channel = None#'ca://MR2L0:HOMS:MMS:PITCH.TWF'
+                self.TweakAmountLineEdit.channel = None#'ca://MR2L0:HOMS:MMS:PITCH.TWV'
+                self.PitchReadbackLabel.channel = None#'ca://MR2L0:HOMS:MMS:PITCH.RBV'
+
+
 
             elif self.destination=='MFX' or self.destination=='MEC':
                 self.pitchGroupbox.setTitle('MR1L4 Pitch Adjustment')
@@ -197,13 +199,6 @@ class App(Display):
                 self.PosTweakButton.channel = 'ca://MR1L4:HOMS:MMS:PITCH.TWF'
                 self.TweakAmountLineEdit.channel = 'ca://MR1L4:HOMS:MMS:PITCH.TWV'
                 self.PitchReadbackLabel.channel = 'ca://MR1L4:HOMS:MMS:PITCH.RBV'
-                self.NegTweakButton.setEnabled(True)
-                self.PosTweakButton.setEnabled(True)
-                self.TweakAmountLineEdit.setEnabled(True)
-                self.PitchReadbackLabel.setEnabled(True)
-                self.NegTweakButton.updatePressValue(1)
-                self.PosTweakButton.updatePressValue(1)
- 
 
             elif self.destination=='XCS':
                 self.pitchGroupbox.setTitle('MR1L3 Pitch Adjustment')
@@ -211,13 +206,6 @@ class App(Display):
                 self.PosTweakButton.channel = 'ca://MR1L3:HOMS:MMS:PITCH.TWF'
                 self.TweakAmountLineEdit.channel = 'ca://MR1L3:HOMS:MMS:PITCH.TWV'
                 self.PitchReadbackLabel.channel = 'ca://MR1L3:HOMS:MMS:PITCH.RBV'
-                self.NegTweakButton.setEnabled(True)
-                self.PosTweakButton.setEnabled(True)
-                self.TweakAmountLineEdit.setEnabled(True)
-                self.PitchReadbackLabel.setEnabled(True)
-                self.NegTweakButton.updatePressValue(1)
-                self.PosTweakButton.updatePressValue(1)
- 
 
             self.prev_destination = str(self.destination)
 
