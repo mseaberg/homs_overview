@@ -69,7 +69,8 @@ class HOMS_state:
         self.coating_moving = EpicsSignalRO(read_pv=self.prefix+'MMS:YUP.MOVN')
         self.pitch_moving = EpicsSignalRO(read_pv=self.prefix+'MMS:PITCH.MOVN')
 
-        moving_names = ['MMS:PITCH.MOVN','MMS:XUP.MOVN','MMS:YUP.MOVN']
+        moving_names = ['MMS:PITCH.MOVN','MMS:XUP.MOVN','MMS:YUP.MOVN','MMS:PITCH.DMOV',
+                'MMS:XUP.DMOV','MMS:YUP.DMOV']
 
         error_names = ['MMS:XUP:PLC:nErrorId_RBV','MMS:YUP:PLC:nErrorId_RBV','MMS:PITCH:PLC:nErrorId_RBV',
                 'MMS:XDWN:PLC:nErrorId_RBV','MMS:YDWN:PLC:nErrorId_RBV']

@@ -179,15 +179,17 @@ class App(Display):
         if self.destination != self.prev_destination:
             if self.destination=='CXI':
                 self.pitchGroupbox.setTitle('Adjust Undulators')
-                self.NegTweakButton.channel = 'ca://MR2L0:HOMS:MMS:PITCH.TWR'
-                self.PosTweakButton.channel = 'ca://MR2L0:HOMS:MMS:PITCH.TWF'
-                self.TweakAmountLineEdit.channel = 'ca://MR2L0:HOMS:MMS:PITCH.TWV'
-                self.PitchReadbackLabel.channel = 'ca://MR2L0:HOMS:MMS:PITCH.RBV'
+                self.NegTweakButton.channel = None# 'ca://MR2L0:HOMS:MMS:PITCH.TWR'
+                self.PosTweakButton.channel = None#'ca://MR2L0:HOMS:MMS:PITCH.TWF'
+                self.TweakAmountLineEdit.channel = None#'ca://MR2L0:HOMS:MMS:PITCH.TWV'
+                self.PitchReadbackLabel.channel = None#'ca://MR2L0:HOMS:MMS:PITCH.RBV'
 
-                self.NegTweakButton.setEnabled(False)
-                self.PosTweakButton.setEnabled(False)
-                self.TweakAmountLineEdit.setEnabled(False)
-                self.PitchReadbackLabel.setEnabled(False)
+                #self.NegTweakButton.setEnabled(False)
+                #self.PosTweakButton.setEnabled(False)
+                #self.NegTweakButton.updatePressValue(1)
+                #self.PosTweakButton.updatePressValue(1)
+                #self.TweakAmountLineEdit.setEnabled(False)
+                #self.PitchReadbackLabel.setEnabled(False)
 
             elif self.destination=='MFX' or self.destination=='MEC':
                 self.pitchGroupbox.setTitle('MR1L4 Pitch Adjustment')
@@ -199,6 +201,9 @@ class App(Display):
                 self.PosTweakButton.setEnabled(True)
                 self.TweakAmountLineEdit.setEnabled(True)
                 self.PitchReadbackLabel.setEnabled(True)
+                self.NegTweakButton.updatePressValue(1)
+                self.PosTweakButton.updatePressValue(1)
+ 
 
             elif self.destination=='XCS':
                 self.pitchGroupbox.setTitle('MR1L3 Pitch Adjustment')
@@ -210,7 +215,9 @@ class App(Display):
                 self.PosTweakButton.setEnabled(True)
                 self.TweakAmountLineEdit.setEnabled(True)
                 self.PitchReadbackLabel.setEnabled(True)
-
+                self.NegTweakButton.updatePressValue(1)
+                self.PosTweakButton.updatePressValue(1)
+ 
 
             self.prev_destination = str(self.destination)
 

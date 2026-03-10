@@ -3,6 +3,7 @@ import os
 from ophyd import EpicsSignalRO
 from pyqtgraph.Qt import QtGui
 from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5 import QtCore
 import json
 import numpy as np
 
@@ -78,6 +79,7 @@ class StatusIndicator(QStatus, Ui_Status):
         self.colors = []
         self.pitch_rbv = None
         self.nominal_pitch = None
+        self.timer = None
 
     def connect(self,prefix, pitch_pv, moving_pvs, error_pvs, status_names,colors):
         
@@ -99,6 +101,10 @@ class StatusIndicator(QStatus, Ui_Status):
 
         self.status_names = status_names
         self.colors = colors
+        self.timer = QtCore.QTimer()
+        self.timer.setInterval(2000)
+        self.timer.timeout.connect(self.update_status)
+        self.timer.start()
 
     def update_nominal(self, nominal):
         self.nominal_pitch = nominal
@@ -106,14 +112,17 @@ class StatusIndicator(QStatus, Ui_Status):
     def update_status(self,**kwargs):
         #print(kwargs.keys())
         #print(kwargs['obj'])
-
-
+        
+        print(self.pitch_rbv.get())
         moving_status_all = []
         error_status_all = []
-        name = kwargs['obj'].name
+        if 'obj' in kwargs.keys():
+            name = kwargs['obj'].name
+        else:
+            name = ''
         if 'Error' in name:
             self.error_status[name] = kwargs['value']
-        else:
+        elif 'MOVN' in name:
             self.moving_status[name] = kwargs['value']
 
         for key,value in self.moving_status.items():
